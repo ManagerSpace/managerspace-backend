@@ -1,23 +1,29 @@
-name: Deploy to Dinahosting
+name: 🚀 Deploy por FTP
 
 on:
   push:
     branches:
-      - main
+      - main  # Se ejecuta cuando hay cambios en main
 
 jobs:
-  deploy:
+  ftp-deploy:
+    name: 📂 Subir archivos al hosting
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout del código
-        uses: actions/checkout@v3
+      - name: ⬇️ Descargar el código
+        uses: actions/checkout@v4
 
-      - name: Configurar SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGm4qRR6ljzA51Wlt99WNzo/GFzf5KgmHNNSAnyhWrR5 deploy@tudominio.com" > ~/.ssh/known_hosts
-      - name: Subir archivos al servidor
-        run: rsync -avz --delete ./ matriz00@matriz.com.es:www/andreu/managerspace/backend/
+      - name: 📤 Subir archivos por FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
+          local-dir: ./
+          server-dir: /managerspace/backend/
+          exclude: |
+            **/.git*
+            **/.github*
+            **/node_modules/*
+            **/*.md
