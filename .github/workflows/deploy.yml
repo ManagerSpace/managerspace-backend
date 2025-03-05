@@ -27,3 +27,4 @@ jobs:
             **/.github*
             **/node_modules/*
             **/*.md
+          dry-run: false
