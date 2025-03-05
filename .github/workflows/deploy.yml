@@ -20,4 +20,4 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGm4qRR6ljzA51Wlt99WNzo/GFzf5KgmHNNSAnyhWrR5 deploy@tudominio.com" > ~/.ssh/known_hosts
       - name: Subir archivos al servidor
-        run: rsync -avz --delete ./ matriz00@matriz.com.es:/www/andreu/managerspace/backend/
+        run: rsync -avz --delete ./ matriz00@matriz.com.es:www/andreu/managerspace/backend/
