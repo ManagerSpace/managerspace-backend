@@ -112,6 +112,11 @@ class GeneralSeeder extends Seeder
                 $expense->category->update(['user_id' => $expense->company->user_id]);
             });
         }
+
+        $userToUpdate = User::find(8);
+        if ($userToUpdate) {
+            $userToUpdate->update(['email' => 'puchadesandreupascual@gmail.com']);
+        }
     }
 
     private function createTimesheetEntries($userId)
