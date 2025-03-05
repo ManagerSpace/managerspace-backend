@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 📤 Subir archivos por FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4
+        uses: SamKirkland/FTP-Deploy-Action@v5
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USER }}
