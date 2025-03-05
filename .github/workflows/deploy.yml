@@ -1,0 +1,24 @@
+name: Deploy to Dinahosting
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v3
+
+      - name: Configurar SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H matriz.com.es >> ~/.ssh/known_hosts
+
+      - name: Subir archivos al servidor
+        run: rsync -avz --delete ./ matriz00@matriz.com.es:/www/andreu/managerspace/backend/
