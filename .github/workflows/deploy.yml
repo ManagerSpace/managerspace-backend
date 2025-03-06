@@ -39,7 +39,7 @@ jobs:
           username: ${{ secrets.NAS_FTP_USER }}
           password: ${{ secrets.NAS_FTP_PASS }}
           local-dir: ./
-          server-dir: /ManagerSpace/backend/
+          server-dir: /GitHub/ManagerSpace/backend/
           protocol: ftps
           exclude: |
             **/.git*
