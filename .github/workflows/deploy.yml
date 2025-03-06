@@ -41,7 +41,6 @@ jobs:
           local-dir: ./
           server-dir: /GitHub/ManagerSpace/backend/
           protocol: ftps
-          port: 22
           exclude: |
             **/.git*
             **/.github*
