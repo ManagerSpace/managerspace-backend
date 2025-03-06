@@ -200,21 +200,21 @@ class TimesheetController extends Controller
 
         $entries = TimesheetEntry::select('user_id', 'date')
             ->selectRaw('SUM(
-        CASE
-            WHEN type = "check_out" THEN
-                TIME_TO_SEC(TIMEDIFF(time, (
-                    SELECT time
-                    FROM timesheet_entries AS t2
-                    WHERE t2.user_id = timesheet_entries.user_id
-                        AND t2.date = timesheet_entries.date
-                        AND t2.type = "check_in"
-                        AND t2.time < timesheet_entries.time
-                    ORDER BY t2.time DESC
-                    LIMIT 1
-                )))
-            ELSE 0
-        END
-    ) as total_seconds')
+                    CASE
+                        WHEN type = "check_out" THEN
+                            TIME_TO_SEC(TIMEDIFF(time, (
+                                SELECT time
+                                FROM timesheet_entries AS t2
+                                WHERE t2.user_id = timesheet_entries.user_id
+                                    AND t2.date = timesheet_entries.date
+                                    AND t2.type = "check_in"
+                                    AND t2.time < timesheet_entries.time
+                                ORDER BY t2.time DESC
+                                LIMIT 1
+                            )))
+                        ELSE 0
+                    END
+                ) as total_seconds')
             ->where('user_id', $employeeId)
             ->whereBetween('date', [$startDate, $endDate])
             ->groupBy('user_id', 'date')

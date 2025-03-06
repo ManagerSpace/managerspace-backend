@@ -1,20 +1,21 @@
-name: 🚀 Deploy por FTP
+name: 🚀 Deploy por FTP a Hosting y NAS Synology
 
 on:
   push:
     branches:
-      - main  # Se ejecuta cuando hay cambios en main
+      - main
 
 jobs:
   ftp-deploy:
-    name: 📂 Subir archivos al hosting
+    name: 📂 Subir archivos a Hosting y NAS Synology
     runs-on: ubuntu-latest
 
     steps:
       - name: ⬇️ Descargar el código
         uses: actions/checkout@v4
 
-      - name: 📤 Subir archivos por FTP
+      # 🔹 Subir al Hosting principal
+      - name: 📤 Subir archivos al Hosting
         uses: SamKirkland/FTP-Deploy-Action@v4.0.0
         with:
           server: ${{ secrets.FTP_HOST }}
@@ -22,6 +23,22 @@ jobs:
           password: ${{ secrets.FTP_PASS }}
           local-dir: ./
           server-dir: /managerspace/backend/
+          exclude: |
+            **/.git*
+            **/.github*
+            **/node_modules/*
+            **/*.md
+          dry-run: false
+
+      # 🔹 Subir al NAS Synology
+      - name: 📤 Subir archivos al NAS Synology
+        uses: SamKirkland/FTP-Deploy-Action@v4.0.0
+        with:
+          server: ${{ secrets.NAS_FTP_HOST }}
+          username: ${{ secrets.NAS_FTP_USER }}
+          password: ${{ secrets.NAS_FTP_PASS }}
+          local-dir: ./
+          server-dir: /GitHub/ManagerSpace/backend/
           exclude: |
             **/.git*
             **/.github*
