@@ -9,7 +9,6 @@ jobs:
   ftp-deploy:
     name: 📂 Subir archivos a Hosting y NAS Synology por FTPS
     runs-on: ubuntu-latest
-    force: true
 
     steps:
       - name: ⬇️ Descargar el código
