@@ -27,4 +27,5 @@ jobs:
             **/.github*
             **/node_modules/*
             **/*.md
-          dry-run: true
+          dry-run: false
+          sync-mode: true
