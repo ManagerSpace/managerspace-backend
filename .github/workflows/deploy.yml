@@ -46,3 +46,4 @@ jobs:
             **/node_modules/*
             **/*.md
           dry-run: false
+          sync-mode: true
