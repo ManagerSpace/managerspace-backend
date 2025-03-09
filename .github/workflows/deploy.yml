@@ -44,4 +44,5 @@ jobs:
             **/node_modules/*
             **/*.md
           dry-run: false
-          sync-mode: true
+          protocol: ftps
+          port: 21
