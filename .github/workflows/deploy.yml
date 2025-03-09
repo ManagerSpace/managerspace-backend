@@ -29,3 +29,19 @@ jobs:
             **/*.md
           dry-run: false
           sync-mode: true
+
+      - name: 📤 Subir archivos por FTP al NAS Synology
+        uses: SamKirkland/FTP-Deploy-Action@v4.0.0
+        with:
+          server: ${{ secrets.NAS_FTP_HOST }}
+          username: ${{ secrets.NAS_FTP_USER }}
+          password: ${{ secrets.NAS_FTP_PASS }}
+          local-dir: ./
+          server-dir: /GitHub/ManagerSpace/backend/
+          exclude: |
+            **/.git*
+            **/.github*
+            **/node_modules/*
+            **/*.md
+          dry-run: false
+          sync-mode: true
