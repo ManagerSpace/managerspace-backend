@@ -36,6 +36,9 @@ jobs:
           server: ${{ secrets.NAS_FTP_HOST }}
           username: ${{ secrets.NAS_FTP_USER }}
           password: ${{ secrets.NAS_FTP_PASS }}
+          protocol: ftps
+          port: 21
+          passive: true
           local-dir: ./
           server-dir: /GitHub/ManagerSpace/backend/
           exclude: |
@@ -44,5 +47,3 @@ jobs:
             **/node_modules/*
             **/*.md
           dry-run: false
-          protocol: ftps
-          port: 21
